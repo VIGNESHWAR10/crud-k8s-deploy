@@ -59,11 +59,10 @@ Website Capabilities:
 
 ### Built With
 
-* [![ReactJS][React-url]]
-* [![Bootstrap][Bootstrap-url]]
-* [![Express][Express-url]]
-* [![Node][Node-url]]
-* [![Mysql][mysql-url]]
+* ReactJS
+* Bootstrap
+* ExpressJS
+* Mysql
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -96,11 +95,11 @@ Website Capabilities:
 
 ### Local Deployment
 
-1. Move inside the folder
+#### 1. Move inside the folder
 ```sh
-   cd crud
+   cd crud-k8s-deploy
 ```
-2. Deploy backend manifests
+#### 2. Deploy backend manifests
 ```sh
   ## deploy mysql manifests
   kubectl apply -f "kubernetes-manifests/mysql/*.yaml"
@@ -111,23 +110,25 @@ Website Capabilities:
 
   ## deploy backend manifests
   kubectl apply -f "kubernetes-manifests/backend/*.yaml"
-  
-  ## (optional)
-  ## to make it simple we can also use the below command to deploy backend setup all at once
-  make deploy_backend_app
 ```
+  (optional)
+  to make it simple we can also use the below command to deploy backend setup all at once
+  ```sh
+  make deploy_backend_app
+  ```
 
-3. Deploy frontend manifests
+#### 3. Deploy frontend manifests
 ```sh
    ## deploy backend manifests
    kubectl apply -f "kubernetes-manifests/frontend/*.yaml"
-   
-   ## (optional)
-   ## make command for deploying frontend manifests
-   ## make deploy_frontend_app
 ```
+  (optional)
+   make command for deploying frontend manifests
+   ```sh
+   make deploy_frontend_app
+   ```
 
-3. Deploy monitoring manifests
+#### 4. Deploy monitoring manifests
 ```sh
   ## deploy prometheus manifests
   kubectl apply -f "kubernetes-manifests/prometheus/*.yaml"
@@ -137,18 +138,19 @@ Website Capabilities:
 
   ## deploy grafana manifests
   kubectl apply -f "kubernetes-manifests/grafana/*.yaml"
-   
-  ## (ooptional) 
-  ## make command for deploying monitoring manifests
-  ## make enable_monitoring
+```
+(optional) 
+make command for deploying monitoring manifests
+```sh
+  make enable_monitoring
 ```
 
-4. (optional) To deploy application all at once (skip all the above steps)
+#### 5. (optional) To deploy application all at once (skip all the above steps)
 ```sh
   make deploy_complete_stack_local
 ```
 
-5. Access Endpoints:
+#### 6. Access Endpoints:
 ```sh
   ## get Node IP. Replace node_name with correct node name. Eg: node01
   kubectl get node -o wide | grep node_name | awk '{print $6}'

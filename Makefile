@@ -1,6 +1,7 @@
 deploy_backend_app:
 	kubectl apply -f "kubernetes-manifests/mysql/*.yaml"
-	kubectl exec -i `kubectl get pod | grep mysql | awk '{print $1}'` -- mysql -h localhost -u root --password=`kubectl get secret mysql-root-password -o jsonpath='{.data.secretKey}' | base64 -d` < init.sql
+	kubectl exec -i `kubectl get pod | grep mysql | awk '{print $1}'` -- mysql -h localhost -u root \
+	--password=`kubectl get secret mysql-root-password -o jsonpath='{.data.secretKey}' | base64 -d` < init.sql
 	kubectl apply -f "kubernetes-manifests/backend/*.yaml"
 
 deploy_frontend_app:
