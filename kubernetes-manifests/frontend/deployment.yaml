@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    name: frontend
+spec:
+  selector:
+    matchLabels:
+      name: frontend
+  template:
+    metadata:
+      labels:
+        name: frontend
+    spec:
+      containers:
+      - name: frontend-new
+        image: vigneshwar10/crud-frontend:v1.0.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 256m
+            memory: 512Mi
+          limits:
+            cpu: 256m
+            memory: 512Mi
+        env:
+          - name: REACT_APP_BACKEND_HOST
+            value: backend
+          - name: REACT_APP_BACKEND_PORT
+            value: "3000"
