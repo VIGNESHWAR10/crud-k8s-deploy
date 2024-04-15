@@ -99,6 +99,7 @@ Website Capabilities:
 ```sh
    cd crud-k8s-deploy
 ```
+
 #### 2. Deploy backend manifests
 ```sh
   ## deploy mysql manifests
@@ -111,6 +112,7 @@ Website Capabilities:
   ## deploy backend manifests
   kubectl apply -f "kubernetes-manifests/backend/*.yaml"
 ```
+
   (optional)
   to make it simple we can also use the below command to deploy backend setup all at once
   ```sh
@@ -122,6 +124,7 @@ Website Capabilities:
    ## deploy backend manifests
    kubectl apply -f "kubernetes-manifests/frontend/*.yaml"
 ```
+
   (optional)
    make command for deploying frontend manifests
    ```sh
@@ -139,6 +142,7 @@ Website Capabilities:
   ## deploy grafana manifests
   kubectl apply -f "kubernetes-manifests/grafana/*.yaml"
 ```
+
 (optional) 
 make command for deploying monitoring manifests
 ```sh
@@ -155,6 +159,7 @@ make command for deploying monitoring manifests
   ## get Node IP. Replace node_name with correct node name. Eg: node01
   kubectl get node -o wide | grep node_name | awk '{print $6}'
 ```
+
   Website can be accessed by: http://node_ip:30011
 
   Prometheus can be accessed by: http://node_ip:30000
@@ -179,33 +184,42 @@ make command for deploying monitoring manifests
 
 ### Cleanup
 
-1. Delete frontend components
+#### 1. Delete frontend components
 ```sh
   kubectl delete -f "kubernetes-manifests/frontend/*.yaml"
-
-  ## or use
-  ## make delete_frontend_app
 ```
 
-2. Delete backend components
+(optional) use make
+```sh
+  make delete_frontend_app
+```
+
+#### 2. Delete backend components
 ```sh
   kubectl delete -f "kubernetes-manifests/mysql/*.yaml"
-	kubectl delete -f "kubernetes-manifests/backend/*.yaml"
-
-  ## or use
-  ## make delete_backend_app
+  kubectl delete -f "kubernetes-manifests/backend/*.yaml"
 ```
 
-3. Delete monitoring components
+(optional) use make
+```sh
+  make delete_backend_app
+```
+
+#### 3. Delete monitoring components
 ```sh
   kubectl delete -f "kubernetes-manifests/prometheus/*.yaml"
-	kubectl delete -f "kubernetes-manifests/prometheus/kube-state-metrics/*.yaml"
-	kubectl delete -f "kubernetes-manifests/grafana/*.yaml"
 
-  ## or use
-  ## make disable_monitoring
+  kubectl delete -f "kubernetes-manifests/prometheus/kube-state-metrics/*.yaml"
+  
+  kubectl delete -f "kubernetes-manifests/grafana/*.yaml"
 ```
-4. (optional) complete cleanup (skip all the above steps)
+
+(optional) use make
+```sh
+  make disable_monitoring
+```
+
+#### 4. (optional) complete cleanup (skip all the above steps)
 ```sh
   make delete_complete_stack_local
 ```
